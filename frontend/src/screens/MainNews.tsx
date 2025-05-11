@@ -48,6 +48,7 @@ function AppContent() {
   }, [wallet])
 
   const fetchNews = async (program: Program) => {
+    // @ts-ignore
     const news = await program.account.news.all()
     setNewsList(news as NewsItem[])
   }
