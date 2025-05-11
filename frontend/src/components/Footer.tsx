@@ -19,15 +19,24 @@ const Footer = () => {
               based on community votes.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a 
+              href="https://x.com/ChiragG11071954" 
+              target="_blank"
+              className="text-gray-400 hover:text-white transition-colors">
                 <Twitter className="h-5 w-5" />
                 <span className="sr-only">Twitter</span>
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a 
+              href="https://chirag.thrive10xlabs.in" 
+              target="_blank"
+              className="text-gray-400 hover:text-white transition-colors">
                 <Discord className="h-5 w-5" />
                 <span className="sr-only">Discord</span>
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a 
+              href="https://github.com/chiraggowda92187" 
+              target="_blank"
+              className="text-gray-400 hover:text-white transition-colors">
                 <Github className="h-5 w-5" />
                 <span className="sr-only">GitHub</span>
               </a>

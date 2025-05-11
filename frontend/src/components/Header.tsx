@@ -11,7 +11,7 @@ const Header = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
-            <a href="#" className="flex items-center">
+            <a href="/" className="flex items-center">
               <div className="h-8 w-8 rounded-full bg-gradient-to-r from-purple-600 to-green-400 flex items-center justify-center">
                 <span className="text-white font-bold">tsn</span>
               </div>
@@ -41,14 +41,23 @@ const Header = () => {
                 <ChevronDown className="ml-1 h-4 w-4" />
               </button>
               <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-50">
-                  Discord
+                <a 
+                href="https://chirag.thrive10xlabs.in"
+                target="_blank"
+                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-50">
+                  Portfolio
                 </a>
-                <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-50">
+                <a 
+                href="https://x.com/ChiragG11071954" 
+                target="_blank"
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-50">
                   Twitter
                 </a>
-                <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-50">
-                  Telegram
+                <a 
+                href="https://github.com/chiraggowda92187" 
+                target="_blank"
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-50">
+                  Github
                 </a>
               </div>
             </div>
