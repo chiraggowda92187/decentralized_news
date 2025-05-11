@@ -5,8 +5,7 @@ declare_id!("5ovZoJEY3eFKhFGZ7ZaT5jVKftyyfQGBUQ7m6DX11agc");
 pub mod decentralized_news {
     use super::*;
 
-    pub fn initialize_news(ctx: Context<InitializeNews>, content: String, timestamp: i64) -> Result<()>
- {
+    pub fn initialize_news(ctx: Context<InitializeNews>, content: String, timestamp: i64) -> Result<()> {
         require!(content.len() <= 1000, CustomError::ContentTooLong);
 
         let news = &mut ctx.accounts.news;
@@ -33,18 +32,43 @@ pub mod decentralized_news {
     pub fn reward(ctx: Context<RewardContext>) -> Result<()> {
         let news = &ctx.accounts.news;
         let reward_account = &mut ctx.accounts.reward;
-
+    
         let now = Clock::get()?.unix_timestamp;
         require!(now > news.timestamp + 180, CustomError::VotingPeriodNotEnded);
-
+    
         if news.upvotes >= news.downvotes {
-            reward_account.amount = news.upvotes * 10;
+            reward_account.amount = news.upvotes * 1080000;
         } else {
-            reward_account.amount = news.downvotes * 10;
+            reward_account.amount = news.downvotes * 1080000;
         }
-
+    
+        // Correctly structure the seeds for invoke_signed
+        let seeds: &[&[u8]] = &[
+            b"vault", 
+            &ctx.bumps.vault.to_le_bytes()  // Convert bump to bytes
+        ];
+    
+        // Perform the transfer
+        let ix = anchor_lang::solana_program::system_instruction::transfer(
+            ctx.accounts.vault.key,
+            ctx.accounts.news_creator.key,
+            reward_account.amount,
+        );
+    
+        anchor_lang::solana_program::program::invoke_signed(
+            &ix,
+            &[
+                ctx.accounts.vault.to_account_info(),
+                ctx.accounts.news_creator.to_account_info(),
+                ctx.accounts.system_program.to_account_info(),
+            ],
+            &[seeds], // Pass the correct seed format
+        )?;
+    
         Ok(())
     }
+    
+    
 }
 
 #[derive(Accounts)]
@@ -83,6 +107,14 @@ pub struct RewardContext<'info> {
     pub news: Account<'info, News>,
     #[account(mut, address = news.creator)]
     pub news_creator: Signer<'info>,
+
+    #[account(
+        mut,
+        seeds = [b"vault"],
+        bump
+    )]
+    pub vault: SystemAccount<'info>,
+
     pub system_program: Program<'info, System>,
 }
 
@@ -115,5 +147,4 @@ pub enum CustomError {
 
     #[msg("Content too long")]
     ContentTooLong,
-
 }

@@ -12,7 +12,7 @@ describe("decentralized_news", () => {
   const wallet = provider.wallet;
 
   const newsContent = "Solana is awesome!";
-  const timestamp = Math.floor(Date.now() / 1000);
+  const timestamp = Math.floor(Date.now() / 1000) - 180; // Subtract 180 seconds (3 minutes) to simulate that voting has ended
   let newsPdaAccount: PublicKey;
 
   it("Initializes news with valid content", async () => {
@@ -59,16 +59,24 @@ describe("decentralized_news", () => {
     expect(news.downvotes.toNumber()).to.equal(0);
   });
 
-  it("Rewards the news after 3 minutes", async () => {
-    console.log("Waiting 180 seconds for reward test to pass voting period...");
-    await new Promise((resolve) => setTimeout(resolve, 180 * 1000)); // 3 minutes
-
+  it("Rewards the news after 3 minutes (simulated by timestamp adjustment)", async () => {
     // Derive reward account PDA
     const [rewardPda] = await PublicKey.findProgramAddress(
       [Buffer.from("reward"), newsPdaAccount.toBuffer()],
       program.programId
     );
-
+  
+    // Log the reward address and the creator address
+    console.log("Reward Account Address:", rewardPda.toString());
+    console.log("News Creator Address:", wallet.publicKey.toString());
+  
+    // Get the creator's balance before the reward transfer
+    const creatorBalanceBefore = await provider.connection.getBalance(wallet.publicKey);
+    console.log("Creator's balance before reward transfer:", creatorBalanceBefore);
+  
+    // Simulate the passing of 3 minutes by adjusting the timestamp
+    const timestampPlusThreeMinutes = new BN(timestamp + 180); // Add 180 seconds (3 minutes) to the timestamp
+  
     await program.methods
       .reward()
       .accounts({
@@ -79,8 +87,24 @@ describe("decentralized_news", () => {
       })
       .signers([wallet.payer])
       .rpc();
-
+  
+    // Get the creator's balance after the reward transfer
+    const creatorBalanceAfter = await provider.connection.getBalance(wallet.publicKey);
+    console.log("Creator's balance after reward transfer:", creatorBalanceAfter);
+  
+    // Check the difference in balance
+    const balanceDifference = creatorBalanceBefore - creatorBalanceAfter;
+    console.log("Balance difference:", balanceDifference);
+  
+    // Calculate the expected reward
+    const rewardAmount = 10; // 1 upvote * 10
+  
+    // Verify the creator received the reward (balance should have increased by rewardAmount)
+    expect(creatorBalanceAfter).to.be.greaterThan(creatorBalanceBefore);
+    expect(creatorBalanceAfter - creatorBalanceBefore).to.equal(rewardAmount);
+  
     const reward = await program.account.rewardData.fetch(rewardPda);
     expect(reward.amount.toNumber()).to.equal(10); // 1 upvote * 10
   });
+  
 });
