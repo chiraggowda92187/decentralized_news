@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Connection, PublicKey, SystemProgram, type Commitment, type ConfirmOptions } from "@solana/web3.js"
 import { Program, AnchorProvider, BN } from "@coral-xyz/anchor"
-import idl from "../../../target/idl/decentralized_news.json"
+import idl from "../idl/decentralized_news.json"
 // import { WalletAdapterNetwork } from "@solana/wallet-adapter-base"
 import { ConnectionProvider, WalletProvider, useAnchorWallet } from "@solana/wallet-adapter-react"
 import { WalletModalProvider, WalletMultiButton } from "@solana/wallet-adapter-react-ui"

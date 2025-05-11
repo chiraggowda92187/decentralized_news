@@ -1,0 +1,247 @@
+{
+  "address": "5ovZoJEY3eFKhFGZ7ZaT5jVKftyyfQGBUQ7m6DX11agc",
+  "metadata": {
+    "name": "decentralized_news",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "initialize_news",
+      "discriminator": [
+        215,
+        153,
+        67,
+        16,
+        133,
+        77,
+        83,
+        150
+      ],
+      "accounts": [
+        {
+          "name": "news",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  110,
+                  101,
+                  119,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "arg",
+                "path": "timestamp"
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "content",
+          "type": "string"
+        },
+        {
+          "name": "timestamp",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "reward",
+      "discriminator": [
+        1,
+        189,
+        15,
+        193,
+        243,
+        42,
+        133,
+        82
+      ],
+      "accounts": [
+        {
+          "name": "reward",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  119,
+                  97,
+                  114,
+                  100
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "news"
+              }
+            ]
+          }
+        },
+        {
+          "name": "news",
+          "writable": true
+        },
+        {
+          "name": "news_creator",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "vote",
+      "discriminator": [
+        227,
+        110,
+        155,
+        23,
+        136,
+        126,
+        172,
+        25
+      ],
+      "accounts": [
+        {
+          "name": "news",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "upvote",
+          "type": "bool"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "News",
+      "discriminator": [
+        110,
+        125,
+        33,
+        126,
+        45,
+        231,
+        25,
+        133
+      ]
+    },
+    {
+      "name": "RewardData",
+      "discriminator": [
+        250,
+        240,
+        225,
+        55,
+        194,
+        172,
+        251,
+        87
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "VotingPeriodNotEnded",
+      "msg": "Voting period has not ended yet"
+    },
+    {
+      "code": 6001,
+      "name": "ContentTooLong",
+      "msg": "Content too long"
+    }
+  ],
+  "types": [
+    {
+      "name": "News",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "content",
+            "type": "string"
+          },
+          {
+            "name": "upvotes",
+            "type": "u64"
+          },
+          {
+            "name": "downvotes",
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          },
+          {
+            "name": "creator",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RewardData",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "amount",
+            "type": "u64"
+          }
+        ]
+      }
+    }
+  ]
+}
