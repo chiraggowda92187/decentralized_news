@@ -1,5 +1,3 @@
-//import { ArrowRight } from "lucide-react"
-
 const Hero = () => {
   return (
     <section className="relative overflow-hidden pt-16 md:pt-20 lg:pt-24">
@@ -18,11 +16,11 @@ const Hero = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a
-  href="/decentralized_news"
-  className="flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-700 hover:bg-purple-800 shadow-sm no-underline"
->
-  Launch App
-</a>
+                href="/decentralized_news"
+                className="flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-700 hover:bg-purple-800 shadow-sm no-underline"
+              >
+                Launch App
+              </a>
 
               <a
                 href="#how-it-works"
@@ -32,8 +30,9 @@ const Hero = () => {
               </a>
             </div>
           </div>
+
           <div className="relative lg:h-[500px] flex items-center justify-center">
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-100 to-green-100 rounded-2xl opacity-30 transform rotate-3"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-100 to-green-100 rounded-2xl opacity-30 transform rotate-3 pointer-events-none"></div>
             <div className="relative z-10 bg-white p-6 rounded-xl shadow-xl transform -rotate-2 w-full max-w-md">
               <div className="flex items-center mb-4">
                 <div className="h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center">
@@ -47,7 +46,9 @@ const Hero = () => {
                   <span>+24.5 SOL</span>
                 </div>
               </div>
-              <h2 className="text-lg font-bold mb-2">Breaking: New Solana Ecosystem Fund Announced</h2>
+              <h2 className="text-lg font-bold mb-2">
+                Breaking: New Solana Ecosystem Fund Announced
+              </h2>
               <p className="text-sm text-gray-600 mb-4">
                 The Solana Foundation has announced a $100M fund to support developers building on the Solana
                 blockchain...
@@ -83,10 +84,10 @@ const Hero = () => {
       </div>
 
       {/* Decorative elements */}
-      <div className="absolute top-1/2 left-0 -translate-y-1/2 transform -translate-x-1/2 w-[500px] h-[500px] rounded-full bg-purple-200 opacity-20 blur-3xl"></div>
-      <div className="absolute bottom-0 right-0 transform translate-x-1/4 translate-y-1/4 w-[400px] h-[400px] rounded-full bg-green-200 opacity-20 blur-3xl"></div>
+      <div className="absolute top-1/2 left-0 -translate-y-1/2 transform -translate-x-1/2 w-[500px] h-[500px] rounded-full bg-purple-200 opacity-20 blur-3xl pointer-events-none"></div>
+      <div className="absolute bottom-0 right-0 transform translate-x-1/4 translate-y-1/4 w-[400px] h-[400px] rounded-full bg-green-200 opacity-20 blur-3xl pointer-events-none"></div>
     </section>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;
