@@ -12,12 +12,13 @@ const CTA = () => {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="/decentralized_news"
-              className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-purple-700 bg-white hover:bg-purple-50 shadow-sm"
-            >
-              Launch App
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </a>
+  href="/decentralized_news"
+  className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-purple-700 bg-white hover:bg-purple-50 shadow-sm"
+>
+  <span className="pointer-events-none">Launch App</span>
+  <ArrowRight className="ml-2 h-5 w-5 pointer-events-none" />
+</a>
+
             <a
               href="https://x.com/ChiragG11071954"
                 target="_blank"
