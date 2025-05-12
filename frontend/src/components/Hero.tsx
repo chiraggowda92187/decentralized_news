@@ -21,8 +21,8 @@ const Hero = () => {
   href="/decentralized_news"
   className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md bg-purple-600 text-white hover:bg-purple-900 shadow-sm"
 >
-  <span className="pointer-events-none">Launch App</span>
-  <ArrowRight className="ml-2 h-5 w-5 pointer-events-none" />
+  Start publishing 
+  
 </a>
               <a
                 href="#how-it-works"
